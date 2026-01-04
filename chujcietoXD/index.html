@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Gradient Background</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    body {
+        background:
+            radial-gradient(
+                circle at 10% 10%,
+                rgba(0, 225, 255, 0.096),
+                transparent 105%
+            ),
+            linear-gradient(
+                180deg,
+                #000000 0%,
+                #0b0b0b 70%
+            );
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-content {
+        flex: 1;
+        position: relative;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        width: 80%;
+        height: 10%;
+        position: absolute;
+        top: 26px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .kategoria-navbar-grid {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        width: 25%;
+        height: 120px;
+        position: absolute;
+        top: -2px;
+        right: 0px;
+        text-align: center;
+        align-items: center;
+    }
+    .kategoria-navbar {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .kategoria-navbar:hover {
+        color: #007b91
+    }
+    .logo img {
+        border-radius: 100%;
+        width: 100px;
+        height: 100px;
+    }
+    .container {
+        width: 450px;
+        position: absolute;
+        top: 45%;
+        font-size: 20px;
+    }
+    h3 {
+        font-family: 'Montserrat', sans-serif;
+    }
+    .postać {
+        width: 36%;
+        height: 70%;
+        position: absolute;
+        left: 51%;
+        transform: translate(-50%);
+        top: 30%;
+        background: url("postac.png") fixed;
+        background-size: cover;
+    }
+
+    /* ZMNIEJSZONY FOOTER */
+    .custom-footer {
+        background-color: #050505; /* Jeszcze ciemniejszy dla kontrastu */
+        color: #ffffff;
+        padding: 15px 10px; /* Znacznie mniejszy odstęp pionowy */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        border-top: 1px solid #111;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .footer-nav {
+        margin-bottom: 8px; /* Mniejszy odstęp od tekstu poniżej */
+    }
+
+    .footer-nav a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 13px; /* Mniejsza czcionka linków */
+        margin: 0 12px;
+        transition: color 0.3s;
+    }
+
+    .footer-nav a:hover {
+        color: #007b91;
+    }
+
+    .footer-disclaimer {
+        color: #444444; /* Ciemniejszy szary, mniej rzucający się w oczy */
+        font-size: 9px; /* Bardzo mała czcionka dla zastrzeżeń */
+        line-height: 1.4;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+        .footer-nav a {
+            display: inline-block; /* Zachowuje liniowość na mniejszych ekranach póki się mieści */
+            margin: 5px 8px;
+        }
+    }
+    /* Loading Screen Overlay */
+    #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        animation: fade 3s ease-in forwards;
+    }
+
+    #loading-screen img {
+        border-radius: 100%;
+        width: 250px;
+        height: 250px;
+        animation: explode 3s ease-in forwards;
+    }
+
+    @keyframes explode {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.5);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(50);
+            opacity: 0;
+        }
+    }
+    @keyframes fade {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.5);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(50);
+            opacity: 0;
+        }
+    }
+        /* STYL DLA KOMUNIKATU BLOKADY */
+        #block-message {
+            display: none; /* Domyślnie ukryte */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            color: white;
+            z-index: 4;
+            text-align: center;
+            padding-top: 20vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #block-message h1 { font-size: 3rem; color: #ff4d4d; }
+        #block-message p { font-size: 1.5rem; }
+
+        /* REAKCJA NA MAŁE EKRANY (TELEFONY I TABLETY) */
+        @media only screen and (max-width: 1024px) {
+            #main-content {
+                display: none !important; /* Ukrywa całą treść strony */
+            }
+            #block-message {
+                display: block; /* Pokazuje komunikat */
+            }
+            body {
+                overflow: hidden; /* Blokuje przewijanie */
+                background-color: #111;
+            }
+        }
+</style>
+</head>
+<body>
+    <div id="loading-screen">
+        <img src="https://cdn.discordapp.com/icons/1446933515324362997/0829da4ea577046c4491692d0d2f766d.webp?size=480" alt="Logo">
+    </div>
+    <div class="main-content">
+        <div class="navbar">
+            <div class="logo"><img src="https://cdn.discordapp.com/icons/1446933515324362997/0829da4ea577046c4491692d0d2f766d.webp?size=480"></div>
+            <div class="kategoria-navbar-grid">
+                <div class="kategoria-navbar" onclick="window.location.href='test.html'">SKRYPTY</div>
+                <div class="kategoria-navbar" onclick="window.location.href='https://discord.gg/ThfZ4TyqcV'">DISCORD</div>
+                <div class="kategoria-navbar" onclick="window.location.href='https://lider.tebex.io/category/bilety'">SKLEP</div>
+            </div>
+        </div>
+
+        <h3 style="position: absolute; font-size: 32px; top: 35%; left: 10%">WITAJ NA <span style="color: #00d9ff">LiderRP</span></h3>
+        <div class="container" style="left: 10%">
+            <p style="color: #8EAA8A"><strong style="color:#fff">LiderRP</strong> to wyjątkowy serwer role-play, który stawia na budowanie zgranego i zaangażowanego community, skupiającego się na odgrywaniu wybranych przez siebie ról. Gracze mają możliwość tworzenia i rozwijania unikalnych postaci, zanurzając się w bogatym świecie Los Santos - mieście pełnym intryg, przygód i nieoczekiwanych zwrotów akcji.</p>
+        </div>
+
+        <h3 style="position: absolute; font-size: 32px; top: 35%; right: 9%">NOWY WYMIAR <span style="color: #00d9ff">JAKOŚCI</span></h3>
+        <div class="container" style="right: 6%">
+            <p style="color: #8EAA8A"><strong style="color:#fff">LiderRP</strong> to dynamicznie rozwijający się zespół, w którym pracuje obecnie ponad 15 developerów specjalizujących się w różnych dziedzinach - od programowania po tworzenie własnych interiorów, ubrań, samochodów czy animacji. Obecnie trwają intensywne prace nad wersją serwera 4.0, która wprowadza liczne nowe funkcje, a większość z nich można już teraz przetestować, dołączając do gry na serwerze whitelist on. Dla graczy chcących sprawdzić podstawowe funkcjonalności dostępna jest również wersja WL:OFF z nieco okrojoną zawartością</p>
+        </div>
+
+        <div class="postać"></div>
+    </div>
+
+    <footer class="custom-footer">
+        <nav class="footer-nav">
+            <a href="https://docs.google.com/document/d/1KRiI6k7jm_0EwRMCKx3kdvQ6DqHH51_qtsNHgpgxmJ0/edit?usp=sharing">Regulamin sklepu</a>
+            <a href="https://checkout.tebex.io/terms">Regulamin Tebex</a>
+            <a href="https://checkout.tebex.io/payment-history">Historia zakupów i zarządzanie subskrypcjami</a>
+        </nav>
+
+        <div class="footer-disclaimer">
+            <p>LiderRP IS NOT APPROVED, SPONSORED, OR ENDORSED BY ROCKSTAR GAMES.</p>
+            <p>LiderRP NIE JEST ZATWIERDZONE, SPONSOROWANE LUB WSPIERANE PRZEZ ROCKSTAR GAMES.</p>
+            <p style="color: rgb(121, 121, 121)">strona stworzona przez: <span style="color:#00d9ff; cursor: pointer;" onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'">poken_12</span></p>
+        </div>
+    </footer>
+    <div id="block-message">
+        <h1><img src="https://media.tenor.com/GTa7-cEKLvEAAAAM/stop-funnyanimal.gif"></h1>
+        <p>Ta strona jest dostępna <b>wyłącznie</b> na komputerach stacjonarnych i laptopach.</p>
+        <p>Proszę zamknij telefon i wróć na PC.</p>
+    </div>
+    <script>
+        // Po zakończeniu animacji usuń loading screen
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.addEventListener('animationend', () => {
+            loadingScreen.style.display = 'none';
+            document.body.style.overflow = 'auto'; // przywraca scroll
+        });
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    const main = document.querySelector('.main-content');
+                    const footer = document.querySelector('.custom-footer');
+                    if(main) main.style.display = 'none';
+                    if(footer) footer.style.display = 'none';
+                    document.getElementById('block-message').style.display = 'block';
+                    document.body.style.backgroundColor = '#000';
+                }
+    </script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Scroll Reveal</title>
+    <style>
+    body {
+        background:
+            radial-gradient(
+                circle at 10% 10%,
+                rgba(0, 225, 255, 0.096),
+                transparent 105%
+            ),
+            linear-gradient(
+                180deg,
+                #000000 0%,
+                #0b0b0b 70%
+            );
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: 100vh;
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+        color: #fff;
+        /* DODANE DLA FOOTERA */
+        display: flex;
+        flex-direction: column;
+    }
+
+        /* GŁÓWNY KONTENER TREŚCI */
+        .main-wrapper {
+            flex: 1;
+        }
+
+        .container {
+            max-width: 1500px; 
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        .spacer {
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .reveal-section {
+            display: flex;
+            align-items: center;
+            gap: 100px;
+            margin-bottom: 350px;
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal-section.from-left { transform: translateX(-150px); }
+        .reveal-section.from-right { flex-direction: row-reverse; transform: translateX(150px); }
+
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .text-content {
+            flex: 1;
+        }
+
+        .text-content h2 {
+            font-size: 3.8rem;
+            margin-bottom: 30px;
+            font-weight: 900;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .text-content p {
+            color: #999;
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+
+        .video-content {
+            flex: 2; 
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .video-content video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 30px;
+            transform: scale(1.1);
+            transition: transform 2s ease;
+        }
+
+        .reveal-section.visible video {
+            transform: scale(1);
+        }
+
+        @media (max-width: 1100px) {
+            .reveal-section, .reveal-section.from-right {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 50px;
+            }
+            .text-content h2 { font-size: 2.5rem; }
+        }
+
+    .navbar {
+        width: 80%;
+        height: 10%;
+        position: absolute;
+        top: 26px;
+        left: 50%;
+        transform: translate(-50%);
+        z-index: 10;
+    }
+    .kategoria-navbar-grid {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        width: 25%;
+        height: 120px;
+        position: absolute;
+        top: -2px;
+        right: 0px;
+        text-align: center;
+        align-items: center;
+    }
+    .kategoria-navbar {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .kategoria-navbar:hover {
+        color: #007b91
+    }
+    .logo img {
+        border-radius: 100%;
+        width: 100px;
+        height: 100px;
+    }
+
+    /* ZMNIEJSZONY FOOTER */
+    .custom-footer {
+        background-color: #050505;
+        color: #ffffff;
+        padding: 15px 10px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        border-top: 1px solid #111;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 50px;
+    }
+
+    .footer-nav {
+        margin-bottom: 8px;
+    }
+
+    .footer-nav a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 13px;
+        margin: 0 12px;
+        transition: color 0.3s;
+    }
+
+    .footer-nav a:hover {
+        color: #007b91;
+    }
+
+    .footer-disclaimer {
+        color: #444444;
+        font-size: 9px;
+        line-height: 1.4;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+        /* STYL DLA KOMUNIKATU BLOKADY */
+        #block-message {
+            display: none; /* Domyślnie ukryte */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #111;
+            color: white;
+            z-index: 99999;
+            text-align: center;
+            padding-top: 20vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #block-message h1 { font-size: 3rem; color: #ff4d4d; }
+        #block-message p { font-size: 1.5rem; }
+
+        /* REAKCJA NA MAŁE EKRANY (TELEFONY I TABLETY) */
+        @media only screen and (max-width: 1024px) {
+            #main-content {
+                display: none !important; /* Ukrywa całą treść strony */
+            }
+            #block-message {
+                display: block; /* Pokazuje komunikat */
+            }
+            body {
+                overflow: hidden; /* Blokuje przewijanie */
+                background-color: #111;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <div class="navbar">
+            <div class="logo"><img src="https://cdn.discordapp.com/icons/1446933515324362997/0829da4ea577046c4491692d0d2f766d.webp?size=480"></div>
+            <div class="kategoria-navbar-grid">
+                <div class="kategoria-navbar" onclick="window.location.href='test.html'">SKRYPTY</div>
+                <div class="kategoria-navbar" onclick="window.location.href='https://discord.gg/ThfZ4TyqcV'">DISCORD</div>
+                <div class="kategoria-navbar" onclick="window.location.href='https://lider.tebex.io/category/bilety'">SKLEP</div>
+            </div>
+        </div>
+
+        <div class="spacer"><h1>Co nas <span style="color: #00d9ff">wyróżnia</span>?</h1></div>
+
+    <div class="container">
+        <div class="reveal-section from-right">
+            <div class="video-content">
+                <video autoplay muted loop playsinline>
+                    <source src="test.mp4" type="video/mp4">
+                    Twoja przeglądarka nie wspiera wideo.
+                </video>
+            </div>
+            <div class="text-content">
+                <h2>Bezpieczeństwo dla CywilRP</h2>
+                <p>System kart zakładników pozwala na respienie NPC jako osób porwanych w celach negocjacyjnych. Karty zakładnika wpływają na ograniczenie do praktycznie zera prowań przypadkowych graczy co zwiększa komfort gry dla osób ceniących sobie spokojne odgrywanie cywilnych akcji roleplay.</p>
+            </div>
+        </div>
+
+        <div class="reveal-section from-left">
+            <div class="video-content">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-2519-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="text-content">
+                <h2>Aktywności leśne</h2>
+                <p>Na serwerze możesz polować na różnego rodzaju zwierzęta które wykraczają poza podstawowe modele z Grand Theft Auto 5! Zbieraj skórę, mięso, grzyby i owoce leśne jednocześnie uważaj, grasują tutaj też drapieżniki!</p>
+            </div>
+        </div>
+        <div class="reveal-section from-right">
+            <div class="video-content">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-2519-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="text-content">
+                <h2>System wkładów do kamizelek</h2>
+                <p>Aby zadbać o bezpieczeństwo podczas strzelanin potrzebujemy wkładów do kamizelek kuloodpornych. Tworzymy je ze skór zwierząt. W zależności od jakości skór możemy uzyskać bardziej odporne wkłady. System zgrabnie łączy interesy graczy crime oraz cywili dzięki temu rozwiązaniu administracja nie musi ingerować w rynek kamizelek a on sam działa samodzielnie dając możliwości dla dużej ilości graczy.</p>
+            </div>
+        </div>
+        <div class="reveal-section from-left">
+            <div class="video-content">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-2519-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="text-content">
+                <h2>Odrzut podczas strzelania</h2>
+                <p>Nasz autorski system reguluje siłę odrzutu podczas strzelania z broni palnej. Jeśli chcesz możesz go niwelować chodząc na strzelnicę. Raz na 4 dni poziom strzelnicy spada o około 20% więc by być w najlepszej formie raz na kilka dni wypada iść na trening!</p>
+            </div>
+        </div>
+        <div class="reveal-section from-right">
+            <div class="video-content">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-2519-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="text-content">
+                <h2>ROZBUDOWANE LOKACJE</h2>
+                <p>Jesteśmy partnerami wielu twórców map. Dzięki temu zoptymalizowane, autorskie, wielkie projekty trafiają przedpremierowo na LiderRP. Nasza wizja jest brana pod uwagę podczas projektowania interiorów co ułatwia odgrywanie roleplay.</p>
+            </div>
+        </div>
+        <div class="reveal-section from-left">
+            <div class="video-content">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-2519-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="text-content">
+                <h2>SYSTEM PARKOUR</h2>
+                <p>Na serwerze zaimplementowany jest system parkour. Przechodząc odpowiedni tor przeszkód dostajemy odpowiednią umiejętność pozwalającą wspinać się na wysokie ściany, możliwość szybszego przemieszczania się czy robienia wślizgów.</p>
+            </div>
+        </div>
+        </div>
+        <div class="spacer"></div>
+    </div>
+
+    <footer class="custom-footer">
+        <nav class="footer-nav">
+            <a href="https://docs.google.com/document/d/1KRiI6k7jm_0EwRMCKx3kdvQ6DqHH51_qtsNHgpgxmJ0/edit?usp=sharing">Regulamin sklepu</a>
+            <a href="https://checkout.tebex.io/terms">Regulamin Tebex</a>
+            <a href="https://checkout.tebex.io/payment-history">Historia zakupów i zarządzanie subskrypcjami</a>
+        </nav>
+
+        <div class="footer-disclaimer">
+            <p>LiderRP IS NOT APPROVED, SPONSORED, OR ENDORSED BY ROCKSTAR GAMES.</p>
+            <p>LiderRP NIE JEST ZATWIERDZONE, SPONSOROWANE LUB WSPIERANE PRZEZ ROCKSTAR GAMES.</p>
+            <p style="color: rgb(121, 121, 121)">strona stworzona przez: <span style="color:#00d9ff; cursor: pointer;" onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'">poken_12</span></p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target.querySelector('video');
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (video) video.play();
+                } else {
+                    entry.target.classList.remove('visible');
+                    if (video) video.pause();
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.reveal-section').forEach(section => {
+            observer.observe(section);
+        });
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        
+      }
+    </script>
+</body>
+</html>

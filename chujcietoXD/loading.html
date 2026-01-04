@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .logo img {
+            border-radius: 100%;
+            width: 250px;
+            height: 250px;
+            animation: explode 3s ease-in forwards;
+        }
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(50); /* efekt wybuchu */
+                opacity: 0;           /* zanikanie */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="https://cdn.discordapp.com/icons/1446933515324362997/0829da4ea577046c4491692d0d2f766d.webp?size=480" alt="Logo">
+    </div>
+</body>
+</html>
