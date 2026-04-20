@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LiderRP.PL | Nowy serwer FiveM</title>
+    <meta name="description"
+        content="LiderRP to nowy serwer FiveM z unikalnymi skryptami i funkcjami. Dołącz do nas i ciesz się niezapomnianą rozgrywką.">
+    <meta name="keywords"
+        content="fivem scripts, r-scripts, esx scripts, qbcore, discord bots, fivem developer, lua, fivem polska, programista fivem, skrypty na zamówienie">
+    <meta name="author" content="r-scripts.xyz">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://r-scripts.xyz/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://liderrp.pl/">
+    <meta property="og:title" content="LiderRP.PL | Nowy serwer FiveM">
+    <meta property="og:description"
+        content="LiderRP to nowy serwer FiveM z unikalnymi skryptami i funkcjami. Dołącz do nas i ciesz się niezapomnianą rozgrywką.">
+    <meta property="og:image"
+        content="https://cdn.discordapp.com/attachments/1454959464414183609/1459921587787792516/image.png?ex=6965096e&is=6963b7ee&hm=37dca0e5d5c56bfe40d52737398c5759298ae9b17da19ffc012004e01969dba9&">
+    <meta property="og:site_name" content="liderrp.pl">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LiderRP.PL | FiveM Server RolePlay">
+    <meta name="twitter:description"
+        content="LiderRP to nowy serwer FiveM z unikalnymi skryptami i funkcjami. Dołącz do nas i ciesz się niezapomnianą rozgrywką.">
+    <meta name="twitter:image"
+        content="https://cdn.discordapp.com/attachments/1454959464414183609/1459909193266892984/image.png?ex=6964fde3&is=6963ac63&hm=1da14d35fb9efecdaa97f8b777c807811e8ef74df15697affbb2cede7990a392&">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "LiderRP.PL",
+      "image": "https://cdn.discordapp.com/attachments/1454959464414183609/1459909193266892984/image.png?ex=6964fde3&is=6963ac63&hm=1da14d35fb9efecdaa97f8b777c807811e8ef74df15697affbb2cede7990a392&",
+      "description": "LiderRP to nowy serwer FiveM z unikalnymi skryptami i funkcjami. Dołącz do nas i ciesz się niezapomnianą rozgrywką.",
+      "url": "https://liderrp.pl",
+      "priceRange": "$$",
+      "knowsAbout": ["FiveM", "Lua", "Discord API", "Python", "JavaScript", "ESX", "QBCore"]
+    }
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fivem: '#1665f9',
+                        discord: '#5865F2',
+                        dark: '#0f0f11',
+                        surface: '#18181b',
+                        code: '#282a36',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f0f11;
+            color: #e4e4e7;
+            overflow-x: hidden;
+        }
+
+        .ambient-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(22, 82, 249, 0.15), transparent 60%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .tech-card {
+            background: rgba(24, 24, 27, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            border-color: rgba(22, 120, 249, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .faq-item.active {
+            background: rgba(24, 24, 27, 0.8);
+            border-color: #16c4f9;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #1665f9;
+            background: rgba(22, 158, 249, 0.05);
+            box-shadow: 0 0 0 2px rgba(22, 158, 249, 0.2);
+        }
+
+        .token-keyword {
+            color: #ff79c6;
+        }
+
+        .token-function {
+            color: #8be9fd;
+        }
+
+        .token-string {
+            color: #f1fa8c;
+        }
+
+        .token-comment {
+            color: #6272a4;
+        }
+
+        .token-number {
+            color: #bd93f9;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0f11;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1665f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-glow"></div>
+    <nav class="fixed w-full z-50 border-b border-white/5 bg-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-terminal text-fivem text-xl"></i>
+                    <span class="text-xl font-bold tracking-tight">Lider<span class="text-fivem">RP</span></span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <div class="flex space-x-8 text-sm font-medium">
+                        <a href="#home" class="text-gray-400 hover:text-white transition" data-lang="nav_home">Start</a>
+                        <a href="#scripts" class="text-gray-400 hover:text-white transition"
+                            data-lang="nav_scripts">Systemy</a>
+                        <a href="wip" class="text-gray-400 hover:text-fivem transition flex items-center gap-1"
+                            data-lang="nav_wip">
+                            <i class="fas fa-hammer text-xs"></i> WIP
+                        </a>
+                    </div>
+                    <a href="https://discord.gg/liderrppl" target="_blank"
+                        class="flex items-center gap-2 bg-discord hover:bg-discord/80 px-5 py-2 rounded-md text-white text-sm font-bold transition shadow-lg shadow-discord/20">
+                        <i class="fab fa-discord"></i> Discord
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button class="text-white text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 lg:pt-48 lg:pb-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <div class="animate-fade-in-up">
+                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight" data-lang="hero_title">
+                        Tworzymy jakość <br>
+                        nowych <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-fivem to-cyan-500">Serwerów</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg mb-8 max-w-lg" data-lang="hero_desc">
+                        Stawiamy na jakość roleplay'u, aby zapewnić najlepsze wrażenia z gry. Nasze
+                        skrypty są tworzone z myślą o graczach którzy szukają nowych wrażeń.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact"
+                            class="px-6 py-3 bg-fivem text-white font-bold rounded-md hover:bg-blue-600 transition shadow-lg shadow-fivem/20"
+                            data-lang="btn_quote">
+                            Discord
+                        </a>
+                        <a href="https://tiktok.com/@liderrp.pl"
+                            class="px-6 py-3 border border-gray-700 text-white font-bold rounded-md hover:border-fivem hover:text-fivem transition flex items-center gap-2">
+                            <i class="fab fa-tiktok"></i> Tiktok
+                        </a>
+                    </div>
+
+
+                </div>
+
+                <div class="relative lg:block hidden animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-fivem to-discord opacity-20 blur-xl rounded-lg">
+                    </div>
+
+                    <img src="img/logo.png" alt="logo"
+                        class="relative rounded-lg border border-white/10 shadow-2xl object-cover w-full h-full">
+                </div>
+    </section>
+
+    <section id="scripts" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2 text-white"><span class="text-fivem">Nasze</span> Skrypty</h2>
+                    <p class="text-gray-400" data-lang="scripts_subtitle">Co nas wyróżnia?</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-1 gap-6">
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/59/824/606/grand-theft-auto-v-police-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-fivem text-white text-xs font-bold rounded">CYWILE</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="radio_title">Bezpieczeństwo dla CywilRP</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="radio_desc">System kart zakładników pozwala na
+                            respienie NPC jako osób porwanych w celach negocjacyjnych. Karty zakładnika wpływają na
+                            ograniczenie do praktycznie zera prowań przypadkowych graczy co zwiększa komfort gry dla
+                            osób ceniących sobie spokojne odgrywanie cywilnych akcji roleplay.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/295/233/878/loss-santos-gta-v-rockstar-games-grand-theft-auto-v-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded">LEŚNICTWO</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="boss_title">Aktywności leśne</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="boss_desc">Na serwerze możesz polować na
+                            różnego rodzaju zwierzęta które wykraczają poza podstawowe modele z Grand Theft Auto 5!
+                            Zbieraj skórę, mięso, grzyby i owoce leśne jednocześnie uważaj, grasują tutaj też
+                            drapieżniki!</p>
+                    </div>
+                </div>
+
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/866/605/596/gta-5-grand-theft-auto-v-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-cyan-500 text-white text-xs font-bold rounded">PANCERZ</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="garage_title">System kamizelek</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="garage_desc">Aby zadbać o bezpieczeństwo
+                            podczas strzelanin potrzebujemy kamizelki kuloodpornej. Tworzymy je ze skór
+                            zwierząt. W zależności od jakości skór możemy uzyskać bardziej odporne kamizelki. System
+                            zgrabnie łączy interesy graczy crime oraz cywili dzięki temu rozwiązaniu administracja nie
+                            musi ingerować w rynek kamizelek a on sam działa samodzielnie dając możliwości dla dużej
+                            ilości graczy.</p>
+                    </div>
+                </div>
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/866/605/596/gta-5-grand-theft-auto-v-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-red-500 text-white text-xs font-bold rounded">BROŃ</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="garage_title">System odrzutu</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="garage_desc">Nasz autorski system reguluje siłę
+                            odrzutu podczas strzelania z broni palnej. Jeśli chcesz możesz go niwelować chodząc na
+                            strzelnicę.</p>
+                    </div>
+                </div>
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/866/605/596/gta-5-grand-theft-auto-v-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded">SIŁA</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="garage_title">System siłowni</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="garage_desc">Zaawansowany system siłowni
+                            zapewnia immersyjny trening. Trenując kondycję, nasza postać będzie
+                            biegać szybciej i dłużej. Wchodząc na siłownię, możemy zauważyć, kto jest stałym bywalcem -
+                            im szybciej ktoś biega na bieżni, tym więcej ma punktów kondycji, a im więcej talerzy
+                            znajduje się na sztandze, tym więcej punktów siły posiada.</p>
+                    </div>
+                </div>
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/866/605/596/gta-5-grand-theft-auto-v-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-gray-500 text-white text-xs font-bold rounded">ZDROWIE</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="garage_title">System Apteczek i bandaży</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="garage_desc">Na serwerze zaaplikowaliśmy system
+                            bandaży których można używać w biegu w celu regeneracji małej ilości HP podczas strzelanin.
+                            System ten pozwala na bardziej dynamiczne pojedynki w akcjach crime. Apteczki za to
+                            regenerują poziom HP do 100% kosztem zablokowania przemieszczania się i wymuszenia
+                            immersyjnej animacji.</p>
+                    </div>
+                </div>
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/866/605/596/gta-5-grand-theft-auto-v-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded">HOODRP</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="garage_title">System driveby</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="garage_desc">Zmodyfikowany system driveby
+                            zapewnia możliwość immersyjnego strzelania. Po osiągnięciu odpowiedniej ilości XP na
+                            strzelnicy w oskryptowanych samochodach nasz styl strzelania zmienia się na bardziej
+                            immersyjny w odpowiednich samochodach. W salonie samochodowym możesz zakupić
+                            oskryptowane pojazdy umożliwiające customowy driveby.</p>
+                    </div>
+                </div>
+                <div class="tech-card rounded-xl overflow-hidden group">
+                    <div
+                        class="h-40 bg-gray-800 relative flex items-center justify-center bg-[url('https://c4.wallpaperflare.com/wallpaper/866/605/596/gta-5-grand-theft-auto-v-wallpaper-preview.jpg')] bg-cover bg-center">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition"></div>
+                        <span
+                            class="relative z-10 px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded">DYNAMIKA</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang="garage_title">Zmiana dynamiki</h3>
+                        <p class="text-gray-400 text-sm mb-6" data-lang="garage_desc">Dzięki aplikacji rozbijalnych
+                            ścian na całej mapie pościgi nabierają nowej dynamiki. Nowe trasy
+                            i taktyki mogą zaskoczyć starych wyjadaczy Grand Theft Auto 5.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="faq" class="py-24 bg-surface/20 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4" data-lang="faq_title">Często Zadawane Pytania</h2>
+                <p class="text-gray-400" data-lang="faq_subtitle">Odpowiedzi na najpopularniejsze pytania dotyczące
+                    serwera.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="faq-item rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
+                        onclick="toggleFaq(this)">
+                        <span class="font-bold text-white" data-lang="faq_q1">Jak dołączyć na LiderRP?</span>
+                        <i class="fas fa-chevron-down text-fivem transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 text-gray-400 text-sm">
+                        <div class="pb-4 pt-0" data-lang="faq_a1">
+                            Pobierasz aplikacje FiveM, wchodzisz na naszego discorda. Połącz siłę z serwerem i graj już
+                            teraz!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
+                        onclick="toggleFaq(this)">
+                        <span class="font-bold text-white" data-lang="faq_q2">Jak zgłosić problem na serwerze?</span>
+                        <i class="fas fa-chevron-down text-fivem transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 text-gray-400 text-sm">
+                        <div class="pb-4 pt-0" data-lang="faq_a2">
+                            Problemy techniczne można zgłaszać poprzez system ticketów na naszym Discordzie. Staramy się
+                            rozpatrywać wszystkie zgłoszenia w ciągu 24 godzin.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
+                        onclick="toggleFaq(this)">
+                        <span class="font-bold text-white" data-lang="faq_q3">Czy mogę zostać administratorem?</span>
+                        <i class="fas fa-chevron-down text-fivem transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 text-gray-400 text-sm">
+                        <div class="pb-4 pt-0" data-lang="faq_a3">
+                            Rekrutacja na Trial Supporta odbywa się okresowo, w zależności od potrzeb serwera.
+                            Ogłoszenia o naborze publikujemy na naszym Discordzie. Wymagana jest znajomość regulaminu,
+                            zaangażowanie w rozwój serwera oraz posiadanie nieskazitelnej reputacji w społeczności FiveM
+                            oraz LiderRP.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
+                        onclick="toggleFaq(this)">
+                        <span class="font-bold text-white" data-lang="faq_q4">Jak często dodawane są nowe
+                            funkcje?</span>
+                        <i class="fas fa-chevron-down text-fivem transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 text-gray-400 text-sm">
+                        <div class="pb-4 pt-0" data-lang="faq_a4">
+                            Regularnie aktualizujemy serwer, dodając nowe funkcje, pojazdy i możliwości. Mniejsze
+                            poprawki wprowadzamy na bieżąco.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="border-t border-white/5 bg-dark pt-16 pb-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-2xl font-bold mb-6">Lider<span class="text-fivem">RP</span></h2>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://discord.gg/WtfZcz2ZTv"
+                        class="text-gray-400 hover:text-discord text-2xl transition"><i class="fab fa-discord"></i></a>
+                    <a href="https://tiktok.com/@liderrppl"
+                        class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@liderrppl"
+                        class="text-gray-400 hover:text-red-500 text-2xl transition"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    &copy; 2024 liderrp.pl. Not affiliated with Rockstar Games or FiveM.
+                </p>
+            </div>
+        </footer>
+
+        <script>
+
+            function toggleFaq(button) {
+                const item = button.parentElement;
+                const answer = item.querySelector('.faq-answer');
+                const icon = button.querySelector('i');
+
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                        otherItem.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+
+                item.classList.toggle('active');
+
+                if (item.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    icon.classList.add('rotate-180');
+                } else {
+                    answer.style.maxHeight = null;
+                    icon.classList.remove('rotate-180');
+                }
+            }
+            const translations = {
+                en: {
+                    nav_home: "Home",
+                    nav_scripts: "FiveM Scripts",
+                    nav_bots: "Discord Bots",
+                    nav_wip: "WIP",
+                    nav_contact: "Get Quote",
+                    nav_portfolio: "Portfolio",
+                    hero_title: "Quality Code <br> for your <span class='text-transparent bg-clip-text bg-gradient-to-r from-fivem to-yellow-500'>Server</span>",
+                    hero_desc: "Professional FiveM server development (ESX/QBCore) and advanced Discord Bots. Code optimization and unique solutions.",
+                    btn_quote: "Get a Quote",
+                    stack_title: "My Tech Stack",
+                    stack_desc: "Technologies I use every day",
+                    stack_lua: "Natives, UI NUI, Optimization",
+                    stack_js: "Bots, React in NUI",
+                    stack_python: "Advanced Bots",
+                    stack_sql: "Databases",
+                    scripts_subtitle: "Custom scripts for your server.",
+                    btn_details: "Details",
+
+                    // SKRYPTY
+                    radio_title: "Radio List",
+                    radio_desc: "Radio list compatible with pma-voice. Displays badges, nicknames, and talking status.",
+                    boss_title: "Boss Menu",
+                    boss_desc: "Advanced management panel. Finances, bonuses, badges, and faction vehicle purchasing. Discord Logs integration.",
+                    garage_title: "Garage System",
+                    garage_desc: "Garage system with visual preview. Engine, body, and fuel state saving. Built-in impound system.",
+
+                    bots_desc: "Need a dedicated bot? I create comprehensive solutions in Python and Node.js. From server automation, through ticket systems, to full economy and whitelist integration with FiveM. Tailored to your needs.",
+                    btn_order_bot: "Order Bot",
+                    contact_title: "Project Quote",
+                    contact_desc: "Have an idea for a script or bot? Fill out the form and I'll give you a quote within 24h.",
+                    label_discord: "Your Discord ID",
+                    label_service: "Service Type",
+                    label_budget: "Estimated Budget (USD/EUR)",
+                    label_desc: "Project Description",
+                    btn_send: "Send Request",
+                    faq_title: "Frequently Asked Questions",
+                    faq_subtitle: "Answers to the most popular questions about cooperation.",
+                    faq_q1: "Are scripts encrypted (Escrow)?",
+                    faq_a1: "Yes, most ready-made scripts are secured with the FiveM Escrow system to protect the code. However, config files and locales are always open. For custom orders, we can arrange full source code delivery.",
+                    faq_q2: "What payment methods do you accept?",
+                    faq_a2: "I prefer PayPal (F&F) and BLIK. For larger orders, split payment is possible (e.g., 50% upfront, 50% upon completion).",
+                    faq_q3: "Do you help with script installation?",
+                    faq_a3: "Of course! Every purchased product includes detailed instructions (README). If you encounter problems, I offer full support with installation and configuration on your server.",
+                    faq_q4: "What is the delivery time?",
+                    faq_a4: "Small scripts and simple Discord bots are usually completed within 24-48 hours. More complex systems can take from 3 to 14 days. You will get an exact deadline during the valuation."
+                },
+                pl: {
+                    nav_home: "Start",
+                    nav_scripts: "Skrypty FiveM",
+                    nav_bots: "Boty Discord",
+                    nav_wip: "WIP",
+                    nav_contact: "Wycena",
+                    nav_portfolio: "Portfolio",
+                    hero_title: "Tworzę jakość <br> dla Twojego <span class='text-transparent bg-clip-text bg-gradient-to-r from-fivem to-yellow-500'>Serwera</span>",
+                    hero_desc: "Profesjonalny rozwój serwerów FiveM (ESX/QBCore) oraz zaawansowane Boty Discord. Optymalizacja kodu i unikalne rozwiązania.",
+                    btn_quote: "Zamów Wycenę",
+                    stack_title: "Mój Tech Stack",
+                    stack_desc: "Technologie, których używam na co dzień",
+                    stack_lua: "Natives, UI NUI, Optymalizacja",
+                    stack_js: "Boty, React w NUI",
+                    stack_python: "Zaawansowane Boty",
+                    stack_sql: "Bazy danych",
+                    scripts_subtitle: "Autorskie skrypty na Twój serwer.",
+                    btn_details: "Szczegóły",
+
+                    // SKRYPTY
+                    radio_title: "Radio List",
+                    radio_desc: "Lista radiowa kompatybilna z pma-voice. Wyświetlanie odznak, ksywek oraz statusu mówienia. Obsługa kanałów frakcyjnych.",
+                    boss_title: "Boss Menu",
+                    boss_desc: "Zaawansowany panel zarządczy. Obsługa finansów, premii, odznak, zatrudniania oraz zakupu pojazdów frakcyjnych. Integracja z Discord Logs.",
+                    garage_title: "Garage System",
+                    garage_desc: "System garaży z wizualnym podglądem pojazdów. Zapis stanu silnika, karoserii i paliwa. Wbudowany system odholowywania pojazdów.",
+
+                    bots_desc: "Potrzebujesz dedykowanego bota? Tworzę kompleksowe rozwiązania w Pythonie oraz Node.js. Od automatyzacji serwera, przez systemy zgłoszeń, aż po pełną integrację ekonomii i whitelisty z FiveM. Wszystko szyte na miarę Twoich potrzeb.",
+                    btn_order_bot: "Zamów Bota",
+                    contact_title: "Wycena Projektu",
+                    contact_desc: "Masz pomysł na skrypt lub bota? Wypełnij formularz, a wycenię go dla Ciebie w ciągu 24h.",
+                    label_discord: "Twój Discord ID",
+                    label_service: "Rodzaj Usługi",
+                    label_budget: "Przewidywany Budżet (PLN)",
+                    label_desc: "Opis Zlecenia",
+                    btn_send: "Wyślij Zapytanie",
+                    faq_title: "Często Zadawane Pytania",
+                    faq_subtitle: "Odpowiedzi na najpopularniejsze pytania dotyczące współpracy.",
+                    faq_q1: "Czy skrypty są szyfrowane (Escrow)?",
+                    faq_a1: "Tak, większość gotowych skryptów jest zabezpieczona systemem FiveM Escrow, aby chronić kod przed wyciekiem. Jednak pliki konfiguracyjne (config.lua) i locale są zawsze otwarte. W przypadku zleceń indywidualnych (custom) możemy ustalić przekazanie pełnego kodu źródłowego.",
+                    faq_q2: "Jakie metody płatności akceptujesz?",
+                    faq_a2: "Preferuję PayPal (F&F) oraz BLIK. W przypadku większych zleceń możliwa jest płatność w transzach (np. 50% przed rozpoczęciem, 50% po okazaniu efektów).",
+                    faq_q3: "Czy pomagasz w instalacji skryptów?",
+                    faq_a3: "Oczywiście! Każdy zakupiony produkt zawiera szczegółową instrukcję (README). Jeśli napotkasz problemy, oferuję pełne wsparcie przy instalacji i konfiguracji na Twoim serwerze w ramach zakupu.",
+                    faq_q4: "Jaki jest czas realizacji zlecenia?",
+                    faq_a4: "Małe skrypty i proste boty Discord zazwyczaj realizuję w 24-48 godzin. Bardziej złożone systemy lub pełne paczki serwerowe mogą zająć od 3 do 14 dni. Dokładny termin poznasz podczas wyceny."
+                }
+            };
+            document.onkeydown = function (e) {
+                if (
+                    e.keyCode == 123 ||
+                    (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) ||
+                    (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) ||
+                    (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) ||
+                    (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
+                ) {
+                    return false;
+                }
+            };
+            setInterval(() => {
+                console.clear();
+                console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
+                console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or 'hack' someone's account, it is a scam.", "font-size: 20px;");
+            }, 1000);
+        </script>
+</body>
+
+</html>
