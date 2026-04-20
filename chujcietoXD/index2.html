@@ -183,7 +183,7 @@
     </style>
 </head>
 
-<body>
+<body class="antialiased select-none" oncontextmenu="return false;">
     <div class="ambient-glow"></div>
     <nav class="fixed w-full z-50 border-b border-white/5 bg-dark/80 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -463,65 +463,68 @@
                 </div>
             </div>
         </div>
-        <footer class="border-t border-white/5 bg-dark pt-16 pb-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-2xl font-bold mb-6">Lider<span class="text-discord">RP</span></h2>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://discord.gg/WtfZcz2ZTv"
-                        class="text-gray-400 hover:text-discord text-2xl transition"><i class="fab fa-discord"></i></a>
-                    <a href="https://tiktok.com/@liderrppl"
-                        class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://youtube.com/@liderrppl"
-                        class="text-gray-400 hover:text-red-500 text-2xl transition"><i class="fab fa-youtube"></i></a>
-                </div>
-                <p class="text-gray-500 text-sm">
-                    &copy; 2026 liderrp.pl. Not affiliated with Rockstar Games or FiveM.
-                </p>
+    </section>
+
+    <footer class="border-t border-white/5 bg-dark pt-16 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold mb-6">Lider<span class="text-discord">RP</span></h2>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://discord.gg/WtfZcz2ZTv" class="text-gray-400 hover:text-discord text-2xl transition"><i
+                        class="fab fa-discord"></i></a>
+                <a href="https://tiktok.com/@liderrppl" class="text-gray-400 hover:text-white text-2xl transition"><i
+                        class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@liderrppl" class="text-gray-400 hover:text-red-500 text-2xl transition"><i
+                        class="fab fa-youtube"></i></a>
             </div>
-        </footer>
+            <p class="text-gray-500 text-sm">
+                &copy; 2026 liderrp.pl. Not affiliated with Rockstar Games or FiveM.
+                &copy; Strona stworzona przez r-scripts | Edytowana przez mrlapek
+            </p>
+        </div>
+    </footer>
 
-        <script>
+    <script>
 
-            function toggleFaq(button) {
-                const item = button.parentElement;
-                const answer = item.querySelector('.faq-answer');
-                const icon = button.querySelector('i');
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const answer = item.querySelector('.faq-answer');
+            const icon = button.querySelector('i');
 
-                document.querySelectorAll('.faq-item').forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
-                        otherItem.querySelector('i').classList.remove('rotate-180');
-                    }
-                });
-
-                item.classList.toggle('active');
-
-                if (item.classList.contains('active')) {
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                    icon.classList.add('rotate-180');
-                } else {
-                    answer.style.maxHeight = null;
-                    icon.classList.remove('rotate-180');
+            document.querySelectorAll('.faq-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    otherItem.querySelector('i').classList.remove('rotate-180');
                 }
+            });
+
+            item.classList.toggle('active');
+
+            if (item.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.classList.add('rotate-180');
+            } else {
+                answer.style.maxHeight = null;
+                icon.classList.remove('rotate-180');
             }
-            document.onkeydown = function (e) {
-                if (
-                    e.keyCode == 123 ||
-                    (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) ||
-                    (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) ||
-                    (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) ||
-                    (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
-                ) {
-                    return false;
-                }
-            };
-            setInterval(() => {
-                console.clear();
-                console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
-                console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or 'hack' someone's account, it is a scam.", "font-size: 20px;");
-            }, 1000);
-        </script>
+        }
+        document.onkeydown = function (e) {
+            if (
+                e.keyCode == 123 ||
+                (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) ||
+                (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) ||
+                (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) ||
+                (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
+            ) {
+                return false;
+            }
+        };
+        setInterval(() => {
+            console.clear();
+            console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
+            console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or 'hack' someone's account, it is a scam.", "font-size: 20px;");
+        }, 1000);
+    </script>
 </body>
 
 </html>
