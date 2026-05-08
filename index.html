@@ -193,7 +193,7 @@ footer {
 
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
     <div class="wall">
         <div class="background-pociemnienie"></div>
@@ -247,7 +247,7 @@ footer {
             </div>
             <div class="faq-item">
                 <div class="faq-question">Jak dołączyć do serwera? <span>+</span></div>
-                <div class="faq-answer">Aby dołączyć, musisz posiadać oryginalną kopię GTA V oraz zainstalowany program FiveM. Następnie przejdź na nasz serwer Discord, aby przejść proces whitelist.</div>
+                <div class="faq-answer">Aby dołączyć, musisz posiadać oryginalną kopię GTA V oraz zainstalowany program FiveM. Następnie przejdź na nasz serwer Discord.</div>
             </div>
 
             <div class="faq-item">
@@ -373,22 +373,6 @@ footer {
             }
         }
         fetchServerStatus();
-        document.onkeydown = function (e) {
-            if (
-                e.keyCode == 123 ||
-                (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) ||
-                (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) ||
-                (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) ||
-                (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
-            ) {
-                return false;
-            }
-        };
-        setInterval(() => {
-            console.clear();
-            console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
-            console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or 'hack' someone's account, it is a scam.", "font-size: 20px;");
-        }, 1000);
     </script>
 </body>
 </html>
