@@ -360,40 +360,29 @@ footer {
         setInterval(changeSlide, 5000);
 
         // API STATUS
-        async function fetchServerStatus() {
-            const statusText = document.getElementById('status-text');
-            const statusdot = document.getElementById('status-dioda');
-        
-            try {
-                const response = await fetch(
-                    'https://servers-frontend.fivem.net/api/servers/single/q9ozdp'
-                );
-            
-                if (!response.ok) {
-                    throw new Error('API ERROR');
-                }
-            
-                const data = await response.json();
-            
-                if (data?.Data) {
-                    statusText.innerText =
-                        `SERWER ONLINE: ${data.Data.clients}/${data.Data.sv_maxclients}`;
-                
-                    statusdot.style.background = '#00ff88';
-                } else {
-                    throw new Error('NO DATA');
-                }
-            
-            } catch (e) {
-                console.error(e);
-            
-                statusText.innerText = 'NIE MOŻNA POBRAĆ STATUSU';
-                statusdot.style.background = '#ff0000';
-            }
+async function fetchServerStatus() {
+    const statusText = document.getElementById('status-text');
+    const statusDot = document.getElementById('status-dioda');
+
+    try {
+        // Teraz pobierasz dane ze swojego Expressa
+        const response = await fetch('http://96.62.223.69:2137/status');
+        const data = await response.json();
+
+        if (data.online) {
+            statusText.innerText = `Gracze: ${data.clients}/${data.maxClients}`;
+            statusDot.style.backgroundColor = "#2ecc71";
+            console.log("Serwer:", data.hostname);
+        } else {
+            throw new Error("Serwer offline");
         }
-        
-        fetchServerStatus();
-        setInterval(fetchServerStatus, 30000);
+
+    } catch (e) {
+        console.error("Błąd:", e);
+        statusText.innerText = "Błąd połączenia z API";
+        statusDot.style.backgroundColor = "#e74c3c";
+    }
+}
         document.onkeydown = function (e) {
             if (
                 e.keyCode == 123 ||
@@ -409,7 +398,9 @@ footer {
             console.clear();
             console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
             console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or 'hack' someone's account, it is a scam.", "font-size: 20px;");
-        }, 1000);
+        }, 1000);     
+        fetchServerStatus();
+        setInterval(fetchServerStatus, 30000);
     </script>
 </body>
 </html>
