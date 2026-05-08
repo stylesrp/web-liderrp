@@ -360,28 +360,37 @@ footer {
         setInterval(changeSlide, 5000);
 
         // API STATUS
-async function fetchServerStatus() {
+function fetchServerStatus() {
     const statusText = document.getElementById('status-text');
     const statusDot = document.getElementById('status-dioda');
 
-    try {
-        // Teraz pobierasz dane ze swojego Expressa
-        const response = await fetch('http://pshost.stylesgg.pl:2137/status');
-        const data = await response.json();
+    const request = new XMLHttpRequest();
+    request.open('GET', 'http://pshost.stylesgg.pl:2137/status', true);
 
-        if (data.online) {
-            statusText.innerText = `Gracze: ${data.clients}/${data.maxClients}`;
-            statusDot.style.backgroundColor = "#2ecc71";
-            console.log("Serwer:", data.hostname);
+    request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+            const data = JSON.parse(request.responseText);
+
+            if (data.online) {
+                statusText.innerText = `Gracze: ${data.clients}/${data.maxClients}`;
+                statusDot.style.backgroundColor = "#2ecc71";
+                console.log("Serwer:", data.hostname);
+            } else {
+                statusText.innerText = "Serwer offline";
+                statusDot.style.backgroundColor = "#e74c3c";
+            }
         } else {
-            throw new Error("Serwer offline");
+            statusText.innerText = "Błąd API";
+            statusDot.style.backgroundColor = "#e74c3c";
         }
+    };
 
-    } catch (e) {
-        console.error("Błąd:", e);
-        statusText.innerText = "Błąd połączenia z API";
+    request.onerror = function() {
+        statusText.innerText = "Błąd połączenia";
         statusDot.style.backgroundColor = "#e74c3c";
-    }
+    };
+
+    request.send();
 }
 
         fetchServerStatus();
