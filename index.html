@@ -383,11 +383,7 @@ async function fetchServerStatus() {
         statusDot.style.backgroundColor = "#e74c3c";
     }
 }
-        setInterval(() => {
-            console.clear();
-            console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
-            console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or 'hack' someone's account, it is a scam.", "font-size: 20px;");
-        }, 1000);     
+
         fetchServerStatus();
         setInterval(fetchServerStatus, 30000);
     </script>
