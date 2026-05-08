@@ -1,77 +1,394 @@
 <!DOCTYPE html>
-<html lang="en" style="--wm-toolbar-height: 1px;">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="t/banner-styles.css">
-    <link rel="stylesheet" type="text/css" href="t/iconochive.css">
-    <!-- End Wayback Rewrite JS Include -->
+<html lang="pl">
+<head>
     <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="t/css2.css" rel="stylesheet">
-    <title>LiderRP</title>
-    <script type="module" crossorigin="" src="t/index-BjbJXJ4e.jss"></script>
-    <link rel="stylesheet" crossorigin="" href="t/index-DV7qR5zD.css">
-    <link id="chromealerabat-link" rel="stylesheet" type="text/css" href="t/content.css">
-    <script type="text/javascript" src="t/fixHeadlessAudio.js"></script>
-  </head>
-  <body>
-    <!-- BEGIN WAYBACK TOOLBAR INSERT -->
-    <div id="app" data-v-app="">
-      <div data-v-caae06b9="" class="social">
-        <div class="social-icons" data-v-caae06b9="">
-          <a type="discord" href="https://dc.liderrp.pl" target="_blank" data-v-caae06b9="">
-            <img src="https://cliply.co/wp-content/uploads/2021/08/372108630_DISCORD_LOGO_400.gif" alt="discord" data-v-caae06b9="">
-          </a>
-          <a type="twitch" href="https://kick.com/mrlapek" target="_blank" data-v-caae06b9="">
-            <img src="https://media.tenor.com/56rb9SP2BC0AAAAj/kick-kick-logo.gif" alt="twitch" data-v-caae06b9="">
-          </a>
-        </div>
-      </div>
-      <div data-v-b793a925="" class="intro">
-        <img data-v-b793a925="" style="width: 100%; height: 100%; position: absolute;" class="bg-intro" src="https://cdn.liderrp.pl/v2/img/scripts/loading/backgrounds/local/3.png" alt="bg-intro">
-        <div data-v-b793a925="" class="bg"></div>
-        <div data-v-b793a925="" class="figures">
-          <div data-v-b793a925="" class="figure1">
-            <img data-v-b793a925="" src="t/shadow.png" alt="shadow">
-          </div>
-          <div data-v-b793a925="" class="figure2">
-            <img data-v-b793a925="" src="t/shadow.png" alt="shadow">
-          </div>
-          <div data-v-b793a925="" class="img-bg">
-            <img data-v-b793a925="" src="t/shadow1.png" alt="shadow">
-          </div>
-        </div>
-        <div data-v-b793a925="" class="lg">
-          <img data-v-b793a925="" style="width: 280px;" class="logo pulse" alt="logo" src="https://cdn.liderrp.pl/v2/img/logo/liderlogo.png">
-          <div class="boxglitch" data-v-b793a925="">
-            <div class="glitch" data-v-b793a925="">
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-              <div class="line" data-v-b793a925="">Wkrótce</div>
-            </div>
-            <span class="coming" data-v-b793a925="">Wkrótce...</span>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script async="" src="t/jss"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiderRP - Landing Page</title>
+    <style>
+        :root {
+            --wall-delay: 0s;
+            --nav-delay: 0.5s;
+            --main-gradient: linear-gradient(90deg, #5a146b, #015fda);
+        }
 
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-K09SX05FHD');
+        body {
+            background-color: #000;
+            margin: 0;
+            min-height: 100vh;
+            display: block; 
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-family: sans-serif;
+        }
+
+        /* --- INTRO --- */
+        .logo-intro { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; display: none; }
+        .logo-intro img { width: 450px; }
+
+        /* --- GŁÓWNA ŚCIANA --- */
+        .wall {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            background-color: #000;
+            background: linear-gradient(90deg, #5a146b5e, #015fda5e);;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #walls {
+            position: fixed;
+            top: -20%; left: -20%; width: 140%; height: 140%;
+            transform: rotate(-15deg);
+            display: flex; flex-direction: column; z-index: 1;
+            pointer-events: none;
+        }
+        .background-pociemnienie {
+            position: fixed; inset: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.685) 0%, rgba(0, 0, 0, 0.925) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .row { display: flex; white-space: nowrap; padding: 10px 0; }
+        .logo-item { height: 80px; margin: 0 40px; opacity: 0.2; }
+        .animate-right { animation: moveRights 30s linear infinite; }
+        @keyframes moveRights { from { transform: translateX(-10%); } to { transform: translateX(0); } }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            position: sticky; top: 30px;
+            margin: 30px auto 0 auto;
+            width: 90%; max-width: 1300px; height: 90px;
+            background: rgba(20, 20, 20, 0.377); backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 50px; box-sizing: border-box; z-index: 100;
+            opacity: 0; transform: translateY(-50px);
+            animation: move-navbar-in 1.2s ease-out forwards;
+            animation-delay: var(--nav-delay);
+        }
+        @keyframes move-navbar-in { to { transform: translateY(0); opacity: 1; } }
+
+        .nav-group { display: flex; gap: 50px; width: 35%; justify-content: center; }
+        .navbar-item { color: #fff; font-size: 14px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; text-decoration: none; }
+        .navbar-item:hover { color: #015fda; }
+        .logo-navbar img { margin-bottom: 15px; width: 150px; }
+
+        /* --- HERO SECTION --- */
+        .hero-content {
+            position: relative; 
+            width: 85%; max-width: 1300px; margin: 80px auto;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 20;
+        }
+        .hero-left { width: 55%; }
+        .hero-status-serwa {
+            background: rgba(255, 255, 255, 0.07); padding: 10px 20px; border-radius: 50px;
+            display: inline-flex; align-items: center; gap: 12px; margin-bottom: 30px;
+        }
+        .status-dot { width: 10px; height: 10px; background-color: #00ff88; border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .hero-text h1 { font-size: 80px; margin: 0; text-transform: uppercase; font-weight: 900; line-height: 0.85; color: #fff; }
+        #hero-dynamic-text { 
+            display: block; background: var(--main-gradient); 
+            -webkit-background-clip: text; background-clip: text; color: transparent; 
+            font-size: 90px; transition: 0.6s;
+        }
+        .hero-text p { color: #aaa; font-size: 18px; max-width: 500px; margin: 30px 0; }
+        .btn-join { display: inline-block; padding: 20px 45px; background: var(--main-gradient); color: #fff; text-decoration: none; font-weight: 900; border-radius: 15px; transition: 0.3s; }
+        .btn-join:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(1, 95, 218, 0.4); }
+
+        #hero-main-img {
+            width: 40%; height: 550px; position: relative;
+            border-radius: 40px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .img-layer { position: absolute; inset: 0; background-size: cover; background-position: center; transition: opacity 1.5s; opacity: 0; }
+        .img-layer.active { opacity: 1; }
+
+        /* --- STATYSTYKI --- */
+        .container-statystyki {
+            position: relative; z-index: 20; width: 85%; max-width: 1300px;
+            margin: 50px auto; border-radius: 24px; background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px); padding: 50px; border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;
+        }
+        .stats-grid { width: 55%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .stat-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .stat-number { font-size: 36px; font-weight: 900; color: #fff; display: block; }
+        .stat-label { font-size: 13px; color: #888; text-transform: uppercase; }
+
+        /* --- FAQ SECTION --- */
+        .container-faq {
+            position: relative; z-index: 20; width: 85%; max-width: 800px;
+            margin: 100px auto; display: flex; flex-direction: column; gap: 15px;
+        }
+        .faq-title { color: #fff; text-align: center; font-size: 32px; font-weight: 900; text-transform: uppercase; margin-bottom: 30px; }
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px; overflow: hidden; cursor: pointer; transition: 0.3s;
+        }
+        .faq-item:hover { background: rgba(255, 255, 255, 0.06); }
+        .faq-question { padding: 20px 30px; color: #fff; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 30px; max-height: 0; overflow: hidden; transition: 0.4s ease-out; color: #aaa; line-height: 1.6; }
+        .faq-item.active .faq-answer { padding: 0 30px 20px 30px; max-height: 200px; }
+
+        /* --- STOPKA --- */
+        .brand img { max-width: 180px; margin-bottom: 15px; }
+footer {
+    margin-top: 50px; 
+    padding: 60px 0 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0, 0, 0, 0.082); 
+    z-index: 30; 
+    position: relative;
+    backdrop-filter: blur(15px);
+}
+
+.footer-inner { 
+    width: 90%; 
+    max-width: 1300px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.foot-links { 
+    display: flex; 
+    gap: 40px; 
+}
+
+/* KLUCZOWA ZMIANA: Flexbox dla kolumny */
+.foot-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.foot-col h4 { 
+    color: #fff; 
+    font-size: 14px; 
+    margin-bottom: 15px; 
+    text-transform: uppercase; 
+}
+
+/* KLUCZOWA ZMIANA: Usunięcie dekoracji i poprawa zachowania linku */
+.foot-col a { 
+    margin-bottom: 8px; 
+    color: #666; 
+    cursor: pointer; 
+    font-size: 14px; 
+    text-decoration: none; /* Usuwa podkreślenie */
+    transition: color 0.3s ease; /* Płynne przejście koloru */
+}
+
+.foot-col a:hover { 
+    color: #fff; 
+}
+
+.small { font-size: 11px; color: #444; line-height: 1.5; }
+        /* ANIMACJE KLASY */
+        .fade-in { animation: fadeIn 1s forwards; opacity: 0; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="wall">
+        <div class="background-pociemnienie"></div>
+        <div id="walls"></div>
+
+        <nav class="navbar">
+            <div class="nav-group"><a href="#" class="navbar-item">Strona główna</a><a href="https://regulamin.liderrp.pl" class="navbar-item">Regulamin</a></div>
+            <div class="logo-navbar"><img src="https://cdn.liderrp.pl/v2/img/logo/liderlogo.png"></div>
+            <div class="nav-group"><a href="https://dc.liderrp.pl" class="navbar-item">Kontakt</a><a href="https://dc.liderrp.pl" class="navbar-item">Discord</a></div>
+        </nav>
+
+        <main class="hero-content">
+            <div class="hero-left">
+                <div class="hero-status-serwa fade-in" style="animation-delay: 0.6s;">
+                    <div class="status-dot" id="status-dioda"></div>
+                    <span id="status-text" style="color: #fff; font-weight: bold; font-size: 14px;">SPRAWDZANIE STATUSU...</span>
+                </div>
+                <div class="hero-text">
+                    <h1 class="fade-in" style="animation-delay: 0.8s;">In Lider</h1>
+                    <h1 class="fade-in" style="animation-delay: 1s;"><span id="hero-dynamic-text">Be A Lider</span></h1>
+                    <p id="hero-desc" class="fade-in" style="animation-delay: 1.2s;">Wkrocz do świata, gdzie zasady piszesz Ty. Dołącz do elity, buduj wpływy i pokaż wszystkim, kto tu rządzi.</p>
+                    <a href="https://cfx.re/join/q9ozdp" class="btn-join fade-in" style="animation-delay: 1.4s;">Dołącz do wyspy</a>
+                </div>
+            </div>
+            <div id="hero-main-img" class="fade-in" style="animation-delay: 1s;">
+                <div id="img-1" class="img-layer active"></div>
+                <div id="img-2" class="img-layer"></div>
+            </div>
+        </main>
+
+        <section class="container-statystyki fade-in" style="animation-delay: 1.6s;">
+            <div class="stats-text">
+                <h2 style="color: #fff; font-size: 32px; font-weight: 900; text-transform: uppercase;">LiderRP w liczbach</h2>
+                <p style="color: #888;">Nasza społeczność stale rośnie. Dołącz do tysięcy graczy, którzy zaufali jakości LiderRP.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card"><span class="stat-number">2+</span><span class="stat-label">Podań</span></div>
+                <div class="stat-card"><span class="stat-number">0+</span><span class="stat-label">Graczy</span></div>
+                <div class="stat-card"><span class="stat-number">10k+</span><span class="stat-label">Godzin</span></div>
+                <div class="stat-card"><span class="stat-number">2+</span><span class="stat-label">Streamerów</span></div>
+            </div>
+        </section>
+
+        <!-- FAQ Z IMPLEMENTACJĄ -->
+        <section class="container-faq fade-in" style="animation-delay: 1.8s;">
+            <h2 class="faq-title">Często zadawane pytania</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Gdzie moge znaleźć regulamin serwera? <span>+</span></div>
+                <div class="faq-answer">Regulamin LiderRP możesz znaleźć na naszym discordzie lub klikając w ten link: <a style="color: #fff; font-weight: 600;" href="https://regulamin.liderrp.pl">regulamin.liderrp.pl</a></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Jak dołączyć do serwera? <span>+</span></div>
+                <div class="faq-answer">Aby dołączyć, musisz posiadać oryginalną kopię GTA V oraz zainstalowany program FiveM. Następnie przejdź na nasz serwer Discord, aby przejść proces whitelist.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Czy serwer jest płatny? <span>+</span></div>
+                <div class="faq-answer">Nie, gra na LiderRP jest całkowicie darmowa. Oferujemy opcjonalne pakiety wsparcia, które pomagają w utrzymaniu infrastruktury.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Jakie są wymagania wiekowe? <span>+</span></div>
+                <div class="faq-answer">Na LiderRP nie ma minimalnego wieku, lecz preferujemy posiadać powyżej 12 lat.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Czy serwer posiada system Whitelist? <span>+</span></div>
+                <div class="faq-answer">Nie, LiderRP jest serwerem WL:OFF który pozwala dołączyć każdemu na serwis bez zbędnych formularzy</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Czy mogę grać na LiderRP, jeśli nigdy wcześniej nie grałem w FiveM? <span>+</span></div>
+                <div class="faq-answer">Tak, nawet do tego zachęcamy! LiderRP to świetne miejsce, aby nauczyć się gry w FiveM – wystarczy obserwować bardziej doświadczonych graczy i stopniowo wdrażać się w rozgrywkę. Zasady funkcjonowania serwera są jasno określone w regulaminie, który należy przeczytać przed rozpoczęciem gry, aby lepiej zrozumieć jego działanie. </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Czy mogę zgłosić własne pomysły na rozwój serwera? <span>+</span></div>
+                <div class="faq-answer">Możesz zgłosić swój pomysł poprzez system support dostępny na naszej stronie. Regularnie analizujemy sugestie i wprowadzamy zmiany, które pozytywnie wpłyną na rozgrywkę.</div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-inner">
+                <div>
+                    <div class="brand"><img src="https://cdn.liderrp.pl/v2/img/baners/liderkurwanapisnastronke.png"></div>
+                    <div class="small">LIDERRP IS NOT AFFILIATED, SPONSORED OR ENDORSED BY ROCKSTAR GAMES. <br> © 2025 liderrp. All rights reserved.</div>
+                </div>
+
+                <div class="foot-links">
+                    <div class="foot-col">
+                        <h4>Socials</h4>
+                        <a href="https://dc.liderrp.pl">Discord</a>
+                        <a href="https://yt.liderrp.pl">Youtube</a>
+                        <a href="https://kick.liderrp.pl">Kick</a>
+                    </div>
+                    <div class="foot-col">
+                        <h4>Pomoc</h4>
+                        <a href="https://dc.liderrp.pl">Support</a>
+                        <a href="https://regulamin.liderrp.pl">Regulamin</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ LOGIC
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+                const span = item.querySelector('span');
+                span.innerText = item.classList.contains('active') ? '-' : '+';
+            });
+        });
+
+        // BACKGROUND LOGOS
+        const wallContainer = document.getElementById('walls');
+        const wallLogos = ['liderems.png', 'liderlspd.png', 'lidercos.png', 'lidercrime.png', 'liderlogo.png', 'lidermedia.png'];
+        for (let i = 0; i < 12; i++) {
+            const row = document.createElement('div');
+            row.className = 'row animate-right';
+            row.style.animationDuration = (30 + Math.random() * 15) + "s";
+            let content = "";
+            for (let j = 0; j < 12; j++) {
+                const url = `https://cdn.liderrp.pl/v2/img/logo/${wallLogos[Math.floor(Math.random() * wallLogos.length)]}`;
+                content += `<img src="${url}" class="logo-item">`;
+            }
+            row.innerHTML = content + content;
+            wallContainer.appendChild(row);
+        }
+
+        // SLIDER LOGIC
+        const dynamicText = document.getElementById('hero-dynamic-text');
+        const heroDesc = document.getElementById('hero-desc');
+        const layers = [document.getElementById('img-1'), document.getElementById('img-2')];
+        const slides = [
+            { text: 'Be A Lider', img: 'https://cdn.liderrp.pl/v2/img/scripts/loading/backgrounds/local/6.png', desc: 'Wkrocz do świata, gdzie zasady piszesz Ty. Dołącz do elity, buduj wpływy i pokaż wszystkim, kto tu rządzi.' },
+            { text: 'Be in Crime', img: 'https://cdn.liderrp.pl/v2/img/scripts/loading/backgrounds/crime/5.png', desc: 'Zapanuj nad podziemiem i stwórz najgroźniejszy kartel w mieście. Szacunek to waluta.' },
+            { text: 'Be in LSPD', img: 'https://cdn.liderrp.pl/v2/img/scripts/loading/backgrounds/lspd/3.png', desc: 'Chroń obywateli i egzekwuj prawo na ulicach Los Santos. Odznaka to odpowiedzialność.' },
+            { text: 'Be a EMS', img: 'https://cdn.liderrp.pl/v2/img/scripts/loading/backgrounds/ems/6.png', desc: 'Ratuj życie i bądź pierwszym na miejscu każdego wypadku. Każda sekunda ma znaczenie.' }
+        ];
+
+        let currentSlide = 0;
+        let activeLayer = 0;
+        layers[0].style.backgroundImage = `url("${slides[0].img}")`;
+
+        function changeSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            const data = slides[currentSlide];
+            const nextLayer = 1 - activeLayer;
+            layers[nextLayer].style.backgroundImage = `url("${data.img}")`;
+            
+            dynamicText.style.opacity = '0';
+            heroDesc.style.opacity = '0';
+
+            setTimeout(() => {
+                layers[nextLayer].classList.add('active');
+                layers[activeLayer].classList.remove('active');
+                activeLayer = nextLayer;
+                dynamicText.innerText = data.text;
+                heroDesc.innerText = data.desc;
+                dynamicText.style.opacity = '1';
+                heroDesc.style.opacity = '1';
+            }, 600);
+        }
+        setInterval(changeSlide, 5000);
+
+        // API STATUS
+        async function fetchServerStatus() {
+            const statusText = document.getElementById('status-text');
+            const statusdot = document.getElementById('status-dioda');
+            try {
+                const response = await fetch('https://corsproxy.io/?' + encodeURIComponent('https://servers-frontend.fivem.net/api/servers/single/q9ozdp'));
+                const data = await response.json();
+                statusText.innerText = `SERWER ONLINE: ${data.Data.clients}/${data.Data.sv_maxclients}`;
+            } catch (e) {
+                statusText.innerText = 'SERWER OFFLINE';
+                statusdot.style.background = '#FF0000';
+            }
+        }
+        fetchServerStatus();
+        document.onkeydown = function (e) {
+            if (
+                e.keyCode == 123 ||
+                (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) ||
+                (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) ||
+                (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) ||
+                (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
+            ) {
+                return false;
+            }
+        };
+        setInterval(() => {
+            console.clear();
+            console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
+            console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or 'hack' someone's account, it is a scam.", "font-size: 20px;");
+        }, 1000);
     </script>
-  </body>
+</body>
 </html>
