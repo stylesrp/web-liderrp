@@ -383,17 +383,6 @@ async function fetchServerStatus() {
         statusDot.style.backgroundColor = "#e74c3c";
     }
 }
-        document.onkeydown = function (e) {
-            if (
-                e.keyCode == 123 ||
-                (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) ||
-                (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) ||
-                (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) ||
-                (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
-            ) {
-                return false;
-            }
-        };
         setInterval(() => {
             console.clear();
             console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
